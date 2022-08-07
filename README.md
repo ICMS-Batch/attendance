@@ -13,19 +13,16 @@ Attendance system for teachers in ICMS college using QR Code.
 ## Installation
 clone this repo
 
-
 ```sh
-cd boilerplate_fastapi
-python3 -m pip install -r requirements.txt
+git clone https://github.com/ICMS-Batch/attendance-system
+cd attendance-system
 ```
-
-
-## Starting the server
 
 ### Linux
 ```sh
 virtualenv ./venv
 source ./venv/bin/activate
+pip install -r requirements.txt
 ./startup.sh
 ```
 
@@ -33,6 +30,22 @@ source ./venv/bin/activate
 ```sh
 virtualenv ./venv
 source .\venv\bin\activate.bat
+pip install -r requirements.txt
+uvicorn app.main:app --reload --host 0.0.0.0
+```
+
+
+
+
+## Starting the server
+
+### Linux
+```sh
+./startup.sh
+```
+
+### Windows
+```sh
 uvicorn app.main:app --reload --host 0.0.0.0
 ```
 
