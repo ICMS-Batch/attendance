@@ -19,9 +19,21 @@ cd boilerplate_fastapi
 python3 -m pip install -r requirements.txt
 ```
 
+
 ## Starting the server
+
+### Linux
 ```sh
+virtualenv ./venv
+source ./venv/bin/activate
 ./startup.sh
+```
+
+### Windows
+```sh
+virtualenv ./venv
+source .\venv\bin\activate.bat
+uvicorn app.main:app --reload --host 0.0.0.0
 ```
 
 ## Browser 
