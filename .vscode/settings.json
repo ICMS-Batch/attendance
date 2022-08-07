@@ -1,0 +1,6 @@
+{
+    "python.defaultInterpreterPath": "./venv/bin/python3.10",
+    "editor.formatOnPaste": true ,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.python"
+}
