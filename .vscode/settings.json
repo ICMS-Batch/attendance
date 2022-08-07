@@ -2,5 +2,13 @@
     "python.defaultInterpreterPath": "./venv/bin/python3.10",
     "editor.formatOnPaste": true ,
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "ms-python.python"
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "[html]":{
+        "editor.defaultFormatter": "HookyQR.beautify"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
