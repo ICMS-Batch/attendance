@@ -13,6 +13,12 @@ const SignUp = () => {
           <Input placeholder="Enter your First Name" label="First Name" />
           <Input placeholder="Enter your Last Name" label="Last Name" />
           <Input placeholder="fullname@tuicms.edu.np" label="Email" />
+          <Input
+            placeholder="Enter your Password"
+            label="Password"
+            type="password"
+          />
+
           <Button title="Sign Up" className="btn" />
         </form>
         <p class="action-container">
