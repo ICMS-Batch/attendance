@@ -1,18 +1,8 @@
-from fastapi.responses import HTMLResponse
-from .config import templates, app
-from fastapi import Request
+from flask import Blueprint
 
+#defining the blueprint
+views = Blueprint("views",__name__)
 
-@app.get("/", response_class=HTMLResponse)
-async def home(request: Request):
-    return templates.TemplateResponse("default/index.html", {"request": request})
-
-
-@app.get("/login", response_class=HTMLResponse)
-async def login(request: Request):
-    return templates.TemplateResponse("auth/login.html", {"request": request})
-
-
-@app.get("/register", response_class=HTMLResponse)
-async def login(request: Request):
-    return templates.TemplateResponse("auth/register.html", {"request": request})
+@views.route("/")
+def index():
+    return "One piece is real"
