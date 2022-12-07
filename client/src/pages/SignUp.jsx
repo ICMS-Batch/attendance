@@ -8,6 +8,7 @@ const SignUp = () => {
     <div className="container">
       <div className="form-container">
         <form className="login-form">
+          <img src="/assets/icmslogo.png" className="imglogo" />
           <label className="form-title">Sign Up</label>
           <Input placeholder="Enter your First Name" label="First Name" />
           <Input placeholder="Enter your Last Name" label="Last Name" />
