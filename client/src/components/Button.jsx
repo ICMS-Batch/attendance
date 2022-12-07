@@ -2,7 +2,7 @@ import React from "react";
 
 const Button = (props) => {
   return (
-    <button class="btn" onclick="userLogin()">
+    <button className="btn" type="submit">
       {props.title}
     </button>
   );

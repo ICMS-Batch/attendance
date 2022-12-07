@@ -9,8 +9,8 @@
   border-radius: 5px;
   background: #ffffff;
   padding: 8px;
-  border: 2px solid #615c5c;
-  height: 3.125rem;
+  border: 1px solid #615c5c;
+  height: 3rem;
   font-size: 1.1em;
 }
 
@@ -27,7 +27,6 @@
   line-height: 1.5em;
   font-style: normal;
   text-transform: uppercase;
-  margin-top: 1.5rem;
   background: none;
 }
 
@@ -35,12 +34,12 @@
   width: 90%;
   align-self: center;
   outline: none;
-  height: 2.5rem;
+  height: 3rem;
   border-radius: 5px;
   background-color: black;
   border: none;
   color: white;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: 700;
   margin-top: 1rem;
   cursor: pointer;
@@ -54,4 +53,15 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+}
+
+.required-field {
+  display: none;
+  background: white;
+  color: #e33939;
+  font-weight: 500;
+}
+
+.form-inputs:invalid[focused="true"] ~ .required-field {
+  display: block;
 }
