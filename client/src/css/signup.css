@@ -34,11 +34,9 @@
 
 .action-container {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   font-weight: 500;
   font-size: 18px;
-  line-height: 17px;
-  padding: 0rem 3.8rem 1rem 3.8rem;
   background: none;
   color: #7b7878;
 }
