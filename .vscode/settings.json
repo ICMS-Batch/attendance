@@ -1,4 +1,5 @@
 {
+    "python.defaultInterpreterPath": "${cwd}/server/venv/bin/python",
     "editor.formatOnPaste": true ,
     "editor.formatOnSave": true,
     "[python]": {
