@@ -22,6 +22,7 @@ class Students(db.Model,SerializerMixin):
 class Admin(db.Model,SerializerMixin) :
 
     #definng the attributes
+    id = db.Column("ID",db.Integer,primary_key = True)
     first_name = db.Column("First Name",db.String(100))
     last_name = db.Column("Last Name",db.String(100))
     email = db.Column("Email",db.String(200))

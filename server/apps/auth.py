@@ -77,9 +77,9 @@ def admin_signup() :
         if (data_from_database == None) :
             #now loading the databse
             admin = models.Admin(
-                main_data["firstname"],
-                main_data["lastname"],
-                main_data["email"],
+                main_data["firstname"].lower(),
+                main_data["lastname"].lower(),
+                main_data["email"].lower(),
                 main_data["password"]
             )
             #adding an instance to the databse
