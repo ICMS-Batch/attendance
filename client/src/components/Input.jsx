@@ -9,7 +9,7 @@ const Input = (props) => {
   };
   return (
     <div className="inputs-div">
-      <label className="input-labels">{props.label}</label>
+      <label className="label">{props.label}</label>
       <input
         type={props?.type || "text"}
         placeholder={props.placeholder}
@@ -20,9 +20,7 @@ const Input = (props) => {
         focused={isFocused.toString()}
         onChange={props.onChange}
       />
-      <span id="required-email" className="required-field">
-        {props.errorMessage}
-      </span>
+      <span className="required-field">{props.errorMessage}</span>
     </div>
   );
 };
