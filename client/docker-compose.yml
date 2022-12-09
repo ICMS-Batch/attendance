@@ -1,0 +1,10 @@
+version: '2'
+services:
+  attendance_frontend:
+    container_name: attendance_frontend
+    restart: always
+    build: .
+    ports:
+      - '8000:80'
+    volumes:
+      - ./certs:/etc/nginx/certs
