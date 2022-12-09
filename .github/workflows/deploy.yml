@@ -22,6 +22,8 @@ jobs:
           SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
 
-      - name: Start the server
-        if: ${{ always() }}
-        run: ssh server 'cd attendance && ls'
+      - name: Deploy frontend
+        run: ssh server 'cd attendance && cd client && git pull origin master && sudo docker-compose up -d --build'
+      
+      - name: Deploy backend
+        run: ssh server 'cd attendance && cd server && git pull origin master && sudo docker-compose up -d --build'
