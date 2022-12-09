@@ -10,5 +10,8 @@
     },
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "yaml.schemas": {
+        "https://json.schemastore.org/sourcehut-build-0.65.0.json": "file:///Users/dibashthapa/projects/attendance-system/.github/workflows/deploy.yml"
     }
 }
