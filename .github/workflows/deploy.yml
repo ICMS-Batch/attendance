@@ -12,6 +12,7 @@ jobs:
           sudo chmod 600 ../private.key
           ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
           echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          ssh -i $SSH_PRIVATE_KEY ubuntu@$SSH_HOST 
         shell: bash
         env:
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY }}
