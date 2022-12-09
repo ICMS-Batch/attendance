@@ -11,14 +11,14 @@
   padding: 8px;
   border: 1px solid #615c5c;
   height: 3rem;
-  font-size: 1.1em;
+  font-size: 0.9rem;
 }
 
-.input-labels {
-  font-size: 1.2em;
-  padding-bottom: 6px;
-  background-color: white;
+.label {
+  font-size: 14px;
   font-weight: 500;
+  padding-bottom: 7px;
+  background: none;
 }
 
 .form-title {
@@ -39,7 +39,7 @@
   background-color: black;
   border: none;
   color: white;
-  font-size: 1.2em;
+  font-size: 1rem;
   font-weight: 700;
   margin-top: 1rem;
   cursor: pointer;
@@ -57,6 +57,7 @@
 
 .required-field {
   display: none;
+  font-size: 0.9rem;
   background: white;
   color: #e33939;
   font-weight: 500;
@@ -64,4 +65,25 @@
 
 .form-inputs:invalid[focused="true"] ~ .required-field {
   display: block;
+}
+
+@media (min-width: 768px) {
+  .label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding-bottom: 7px;
+    background: none;
+  }
+
+  .btn {
+    font-size: 1.2rem;
+  }
+
+  .form-inputs {
+    font-size: 1.2rem;
+  }
+
+  .required-field {
+    font-size: 1.2rem;
+  }
 }

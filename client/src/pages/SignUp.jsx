@@ -2,7 +2,8 @@ import React, { useState } from "react";
 
 import Input from "../components/Input";
 import Button from "../components/Button";
-import * as signup from "../css/signup.css";
+import * as signup from "../css/login&signup.css";
+import { Link } from "react-router-dom";
 const SignUp = () => {
   const [formDetail, setFormDetail] = useState({
     firstname: "",
@@ -71,7 +72,7 @@ const SignUp = () => {
             onChange={(e) => handleSignup(e)}
           />
           <div className="inputs-div">
-            <label className="input-labels">Semester</label>
+            <label className="label">Semester</label>
             <select
               value={formDetail.semester}
               name="semester"
@@ -93,9 +94,9 @@ const SignUp = () => {
         </form>
         <div className="action-container">
           Have an account?
-          <a className="action-txt" href="../screens/login.php">
+          <Link className="action-txt" to="/login">
             Login
-          </a>
+          </Link>
         </div>
       </div>
     </div>
