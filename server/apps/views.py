@@ -1,7 +1,8 @@
+"""This module contains the views for the app."""
 from flask import Blueprint
 
-#defining the blueprint
-views = Blueprint("views",__name__)
+views = Blueprint("views", __name__)
+
 
 @views.route("")
 def index():
