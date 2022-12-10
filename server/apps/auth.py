@@ -15,7 +15,6 @@ def signup():
         data = request.data
         main = json.loads((data.decode("UTF-8")))
         main_data = main["formValues"]
-        # checking if email existed before or not
         email = main_data["email"]
         data_from_database = Student.query.filter_by(email=email).first()
 
