@@ -13,9 +13,12 @@ jobs:
   
   deploy:
     name: "Deploy to server"
+    if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
-    if: ${{  github.ref == 'refs/head/master' }}
-    steps:
+    steps: 
+      - name: Checkout this repo
+        uses: actions/checkout@v2
+
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
