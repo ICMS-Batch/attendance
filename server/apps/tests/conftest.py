@@ -2,12 +2,12 @@ import pytest
 from apps import create_app, db
 
 from apps import create_app, db
-from apps.models import Student
+from apps.auth.models import User
 
 
 @pytest.fixture(scope="module")
-def new_student():
-    user = Student(
+def new_user():
+    user = User(
         first_name="Dibash",
         last_name="Thapa",
         email="dibashthapa55@gmail.com",
