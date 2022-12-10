@@ -1,6 +1,7 @@
 from sqlalchemy_serializer import SerializerMixin
 from apps import db
 from werkzeug.security import generate_password_hash, check_password_hash
+from .service import AuthServiceError
 
 
 class User(db.Model, SerializerMixin):
@@ -31,6 +32,23 @@ class User(db.Model, SerializerMixin):
 
     def is_password_correct(self, password_plaintext: str):
         return check_password_hash(self.password, password_plaintext)
+
+    @staticmethod
+    def login(data: dict):
+        user = User.query.filter_by(email=data["email"]).first()
+        if user and user.is_password_correct(data["password"]):
+            return user
+        raise AuthServiceError("Invalid credentials")
+
+    @staticmethod
+    def register(email: str, password: str, first_name: str, last_name: str):
+        if User.query.filter_by(email=email).first():
+            raise AuthServiceError("Email already exists")
+        user = User(email=email, first_name=first_name, last_name=last_name)
+        user.set_password(password)
+        db.session.add(user)
+        db.session.commit()
+        return user
 
     def __repr__(self) -> str:
         return f"<User: {self.email}>"

@@ -6,4 +6,4 @@ views = Blueprint("views", __name__)
 
 @views.route("")
 def index():
-    return "One piece is real"
+    return {"message": "Hello World!"}

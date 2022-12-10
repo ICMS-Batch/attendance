@@ -21,7 +21,14 @@ def create_app(env="apps.config.EnvironmentConfig") -> Flask:
     db.init_app(app)
     CORS(app)
 
+    @app.errorhandler(404)
+    def not_found(e):
+        return {"error": "Not Found"}, 404
+
+    with app.app_context():
+        db.create_all()
+
     app.register_blueprint(views, url_prefix="/")
-    app.register_blueprint(auth_bp, url_prefix="/api")
+    app.register_blueprint(auth_bp, url_prefix="/auth")
 
     return app
