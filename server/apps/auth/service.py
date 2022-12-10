@@ -1,2 +1,0 @@
-class AuthServiceError(Exception):
-    pass

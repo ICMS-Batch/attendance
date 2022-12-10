@@ -1,40 +1,56 @@
-from flask import Blueprint, Response
-from .schemas import LoginSchema, RegistrationSchema
+from flask import Blueprint
+from flask import request
 from .models import User
-from schematics.exceptions import DataError
+from apps import db
 import json
-from flask_restful import Resource, Api, request
-from .service import AuthServiceError
 
 auth_bp = Blueprint("auth_bp", __name__)
-auth_api = Api(auth_bp)
 
 
-class LoginResource(Resource):
-    def post(self):
-        try:
-            data = LoginSchema(request.get_json())
-            data.validate()
-            User.login(data)
-            return {"success": "Login Successful"}, 200
-        except DataError as e:
-            return {"error": json.loads(str(e))}, 400
-        except AuthServiceError as e:
-            return {"error": str(e)}, 401
+@auth_bp.route("/signup-data", methods=["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        data = request.data
+        main = json.loads((data.decode("UTF-8")))
+        main_data = main["formValues"]
+        email = main_data["email"]
+        data_from_database = User.query.filter_by(email=email).first()
+
+        if data_from_database is None:
+            User = User(
+                main_data["firstname"].lower(),
+                main_data["lastname"].lower(),
+                main_data["email"].lower(),
+                main_data["password"],
+            )
+
+            db.session.add(User)
+            db.session.commit()
+
+            return "Successfully Registered"
+
+        else:
+            return "Email already existed."
+    return "Successful"
 
 
-class RegisterResource(Resource):
-    def post(self):
-        try:
-            data = RegistrationSchema(request.get_json())
-            data.validate()
-            User.register(data.email, data.password, data.first_name, data.last_name)
-            return Response(status=201)
-        except DataError as e:
-            return {"error": json.loads(str(e))}, 400
-        except AuthServiceError as e:
-            return {"error": str(e)}, 401
+@auth_bp.route("/login-data", methods=["GET", "POST"])
+def login():
 
+    if request.method == "POST":
+        data = request.data
 
-auth_api.add_resource(LoginResource, "/login")
-auth_api.add_resource(RegisterResource, "/register")
+        main = json.loads((data.decode("UTF-8")))
+        main_data = main["formValues"]
+        auth_email = main_data["email"]
+        auth_pass = main_data["password"]
+
+        data_from_database = User.query.filter_by(email=auth_email).first()
+        if data_from_database != None:
+            if data_from_database.password == auth_pass:
+                return "Login Successful"
+            else:
+                return "Wrong Password"
+        else:
+            return "Wrong Email"
+    return ""
