@@ -14,7 +14,7 @@ jobs:
   deploy:
     name: "Deploy to server"
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/head/master' }}
+    if: ${{  github.ref == 'refs/head/master' }}
     steps:
       - name: Configure SSH
         run: |
