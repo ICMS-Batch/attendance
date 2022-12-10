@@ -1,0 +1,82 @@
+.maincontainer {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  background: white;
+}
+
+.class_history {
+  display: flex;
+  width: 350px;
+  justify-content: center;
+  align-items: center;
+  max-width: 450px;
+  height: 400px;
+  max-height: 450px;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid #8c8484;
+  padding: 50px;
+  gap: 10px;
+  position: relative;
+  border-radius: 10.3143px;
+}
+
+.title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.status-wrapper {
+  position: absolute;
+  bottom: 10px;
+  background: inherit;
+  align-self: flex-end;
+  justify-content: flex-end;
+  gap: 10px;
+  display: flex;
+}
+
+.status {
+  background: inherit;
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-red {
+  height: 20px;
+  width: 20px;
+  background: #e33939;
+  border-radius: 50%;
+}
+
+.status-green {
+  height: 20px;
+  width: 20px;
+  background: #13e94f;
+  border-radius: 50%;
+}
+
+.status-txt {
+  font-size: 14px;
+}
+
+.class-wrapper {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 360px;
+  max-width: 90%;
+  align-items: center;
+  padding: 20px 9px;
+  gap: 20px;
+  height: 300px;
+  max-height: 300px;
+  border: 0.634549px solid #8c8484;
+  border-radius: 6.34549px;
+}
