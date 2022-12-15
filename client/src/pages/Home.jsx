@@ -5,6 +5,7 @@ import * as calendarCss from "../css/Calendar.css";
 import * as homeCss from "../css/Home.css";
 import NavBar from "../components/NavBar";
 import ClassDetails from "../components/ClassDetails";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [value, onChange] = useState(new Date(Date.now()));
@@ -32,8 +33,10 @@ const Home = () => {
   ];
   classes.forEach((obj)=>{obj.initials = function(){ let a = [...this.cName]; return a[0] }})
   return (
-    <div className="mainconatiner">
+    <div className="body">
       <NavBar />
+      <div className="class-main-div">
+      <Link className="class-heading">Today's Classes</Link>
       <div className="class-wrapper">
         {classes.map((element, index) => (
           <ClassDetails
@@ -44,19 +47,28 @@ const Home = () => {
           />
         ))}
       </div>
-      <div className="class_history">
+      </div>
+      <div className="class-main-history">
+
+      <div className="class-history">
         <h1 className="title">History</h1>
-        <Calendar onChange={onChange} value={value} />
+        <Calendar onChange={onChange} value={value}  next2Label={null} prev2Label={null}/>
         <div className="status-wrapper">
           <div className="status">
             <div className="status-red"></div>
             <span className="status-txt">Absent</span>
           </div>
           <div className="status">
+            <div className="status-yellow"></div>
+            <span className="status-txt">Half Present</span>
+          </div>
+          <div className="status">
             <div className="status-green"></div>
             <span className="status-txt">Present</span>
           </div>
+          
         </div>
+      </div>
       </div>
     </div>
   );
