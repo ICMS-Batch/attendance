@@ -1,5 +1,5 @@
 {
-    "python.defaultInterpreterPath": "./venv/bin/python3.10",
+    "python.defaultInterpreterPath": "${cwd}/server/venv/bin/python",
     "editor.formatOnPaste": true ,
     "editor.formatOnSave": true,
     "[python]": {
@@ -10,5 +10,8 @@
     },
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "yaml.schemas": {
+        "https://json.schemastore.org/sourcehut-build-0.65.0.json": "file:///Users/dibashthapa/projects/attendance-system/.github/workflows/deploy.yml"
     }
 }
