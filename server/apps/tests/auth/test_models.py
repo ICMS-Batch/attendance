@@ -1,25 +1,21 @@
-"""
-This file (test_models.py) contains the unit tests for the students.py file.
-"""
-from apps.auth.models import User
+# """
+# This file (test_models.py) contains the unit tests for the students.py file.
+# """
 
 
-def test_new_user():
+def test_new_user(test_db, new_user, test_sem):
     """
     GIVEN a User model
     WHEN a new User is created
     THEN check the email, password_hashed, authenticated, and active fields are defined correctly
     """
-    new_user = User(
-        first_name="Dibash",
-        last_name="Thapa",
-        email="dibashthapa55@gmail.com",
-        password="hello_world",
-    )
+
+    new_user.test_create(test_db)
     assert new_user.first_name == "Dibash"
     assert new_user.last_name == "Thapa"
     assert new_user.email == "dibashthapa55@gmail.com"
     assert new_user.password != "hello_world"
+    assert new_user.sem_id == test_sem.id
     assert new_user.__repr__() == "<User: dibashthapa55@gmail.com>"
 
 

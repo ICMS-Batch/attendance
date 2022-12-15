@@ -1,5 +1,5 @@
 from schematics import Model
-from schematics.types import StringType, EmailType
+from schematics.types import StringType, EmailType, IntType
 
 
 class RegistrationSchema(Model):
@@ -7,6 +7,7 @@ class RegistrationSchema(Model):
     first_name = StringType(required=True)
     last_name = StringType(required=True)
     password = StringType(required=True)
+    sem_id = IntType(required=True)
 
 
 class LoginSchema(Model):

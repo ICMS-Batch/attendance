@@ -1,17 +1,38 @@
 import pytest
 from apps import create_app, db
-
-from apps import create_app, db
 from apps.auth.models import User
 
 
 @pytest.fixture(scope="module")
-def new_user():
+def test_db(cli_test_client):
+    flask_app = create_app("apps.config.TestEnvironmentConfig")
+    cli_test_client.invoke(args=["db", "upgrade"])
+
+    with flask_app.app_context():
+        yield db
+
+
+@pytest.fixture(scope="module")
+def test_sem(test_db):
+    from apps.models import Semester
+
+    sem = Semester(
+        name="First Semester",
+        year=2020,
+        description="First Semester of 2020",
+    )
+    sem.test_create(test_db)
+    return sem
+
+
+@pytest.fixture(scope="module")
+def new_user(test_sem):
     user = User(
         first_name="Dibash",
         last_name="Thapa",
         email="dibashthapa55@gmail.com",
-        password="password",
+        password="hello_world",
+        sem_id=test_sem.id,
     )
     return user
 

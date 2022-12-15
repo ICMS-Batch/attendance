@@ -28,7 +28,9 @@ class RegisterResource(Resource):
         try:
             data = RegistrationSchema(request.get_json())
             data.validate()
-            User.register(data.email, data.password, data.first_name, data.last_name)
+            User.register(
+                data.email, data.password, data.first_name, data.last_name, data.sem_id
+            )
             return Response(status=201)
         except DataError as e:
             return {"error": json.loads(str(e))}, 400
