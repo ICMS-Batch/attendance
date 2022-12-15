@@ -31,7 +31,20 @@ const Home = () => {
       cTime: "9:30 AM",
     },
   ];
-  classes.forEach((obj)=>{obj.initials = function(){ let a = [...this.cName]; return a[0] }})
+
+
+  const iterateColor = (index)=>{
+    if(index%2==0 || index%2==undefined){
+      
+      return "#97BCE8";
+    }
+    else{
+      return "#1C2D40";
+    }
+  }
+
+  classes.forEach((obj, index)=>{obj.initials = function(){ let a = [...this.cName]; return a[0] }; obj.backgroundColor = iterateColor(index)})
+  // console.log(classes);
   return (
     <div className="body">
       <NavBar />
@@ -41,6 +54,7 @@ const Home = () => {
         {classes.map((element, index) => (
           <ClassDetails
             key={index}
+            background={element.backgroundColor}
             classInitials={element.initials()}
             classname={element.cName}
             classtime={element.cTime}
