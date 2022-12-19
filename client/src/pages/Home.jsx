@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { Calendar } from "react-calendar";
-import MaterialCalendar from "../components/Material";
+import { Link } from "react-router-dom";
 
-// import * as calendarCss from "../css/Calendar.css";
 import * as homeCss from "../css/Home.css";
 import NavBar from "../components/NavBar";
 import ClassDetails from "../components/ClassDetails";
-import { Link } from "react-router-dom";
+import MantineCalendar from "../components/MantineCalendar";
 
 const Home = () => {
   const [value, onChange] = useState(new Date(Date.now()));
@@ -45,7 +43,6 @@ const Home = () => {
   }
 
   classes.forEach((obj, index)=>{obj.initials = function(){ let a = [...this.cName]; return a[0] }; obj.backgroundColor = iterateColor(index)})
-  // console.log(classes);
   return (
     <div className="body">
       <NavBar />
@@ -67,8 +64,7 @@ const Home = () => {
 
       <div className="class-history">
         <h1 className="class-heading">History</h1>
-        {/* <Calendar onChange={onChange} value={value}  next2Label={null} prev2Label={null}/> */}
-        <MaterialCalendar/>
+        <MantineCalendar/>
         <div className="status-wrapper">
           <div className="status">
             <div className="status-red"></div>
