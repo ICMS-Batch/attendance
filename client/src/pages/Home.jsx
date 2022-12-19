@@ -7,7 +7,6 @@ import ClassDetails from "../components/ClassDetails";
 import MantineCalendar from "../components/MantineCalendar";
 
 const Home = () => {
-  const [value, onChange] = useState(new Date(Date.now()));
   const classes = [
     {
      
