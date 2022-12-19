@@ -3,6 +3,7 @@
   flex-direction: column;
   background: white;
   align-items: center;
+  gap:15px;
 }
 
 
@@ -89,22 +90,22 @@
 }
 
 .status-red {
-  height: 20px;
-  width: 20px;
+  height: 15px;
+  width: 15px;
   background: #e33939;
   border-radius: 50%;
 }
 
 .status-yellow{
-  height: 20px;
-  width: 20px;
+  height: 15px;
+  width: 15px;
   background: #FFCD1B;
   border-radius: 50%;
 }
 
 .status-green {
-  height: 20px;
-  width: 20px;
+  height: 15px;
+  width: 15px;
   background: #13e94f;
   border-radius: 50%;
 }

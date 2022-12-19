@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Calendar } from '@mantine/dates';
 import { Indicator } from '@mantine/core';
 
+
+import mantinecss from "./css/Mantine.css";
 const MantineCalendar=()=> {
   const [value, setValue] = useState(null);
 const logValue = (value)=>{
