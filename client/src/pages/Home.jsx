@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Calendar } from "react-calendar";
+import MaterialCalendar from "../components/Material";
 
-import * as calendarCss from "../css/Calendar.css";
+// import * as calendarCss from "../css/Calendar.css";
 import * as homeCss from "../css/Home.css";
 import NavBar from "../components/NavBar";
 import ClassDetails from "../components/ClassDetails";
@@ -65,8 +66,9 @@ const Home = () => {
       <div className="class-main-history">
 
       <div className="class-history">
-        <h1 className="title">History</h1>
-        <Calendar onChange={onChange} value={value}  next2Label={null} prev2Label={null}/>
+        <h1 className="class-heading">History</h1>
+        {/* <Calendar onChange={onChange} value={value}  next2Label={null} prev2Label={null}/> */}
+        <MaterialCalendar/>
         <div className="status-wrapper">
           <div className="status">
             <div className="status-red"></div>
