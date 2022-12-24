@@ -5,7 +5,9 @@ import SignUp from "../pages/SignUp";
 import PrivateRoutes from "./PrivateRoutes";
 import Dashboard from "../pages/Dashboard";
 import AdminLayout from "../pages/AdminLayout";
-import SideBar from "../components/SideBar";
+import ManageStudent from "../pages/ManageStudent";
+import Settings from "../pages/Settings";
+import History from "../pages/History";
 
 const Routers = () => {
   return (
@@ -15,6 +17,10 @@ const Routers = () => {
       </Route>
       <Route element={<AdminLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/managestudent" element={<ManageStudent />} />
+        <Route path="/history" element={<History/>} />
+        <Route path="/Settings" element={<Settings />} />
+
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />

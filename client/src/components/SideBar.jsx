@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import * as sidebarcss from "./css/sidebar.css";
 import { useState } from "react";
@@ -10,6 +10,33 @@ const SideBar = () => {
 setVisibility(!isVisible);
   }
 
+const links = [
+  {
+    path:'/dashboard',
+    className:'list',
+    linkName:'Dashboard',
+    iconName:'ri-dashboard-line list-icon'
+  },
+  {
+    path:'/managestudent',
+    className:'list',
+    linkName:'Attendance',
+    iconName:'ri-survey-line list-icon'
+  },
+  {
+    path:'/history',
+    className:'list',
+    linkName:'History',
+    iconName:'ri-history-line list-icon'
+  },
+  {
+    path:'/settings',
+    className:'list',
+    linkName:'Settings',
+    iconName:'ri-settings-3-line list-icon'
+  }
+]
+
   return (<>
     <div className={isVisible ? "sidebar" : "sidebar-none"}>
       <div className='sidebar-content-wrapper'>
@@ -17,18 +44,9 @@ setVisibility(!isVisible);
           <img src="/assets/icmslogo.png" className="app-logo" />
           <p className="admin-email">sanjay khadka</p>
         </div>
-        <Link className="list" id="dashboard" to={'/dashboard'}>
-        <i className="ri-dashboard-line list-icon"></i><span>Dashboard</span>
-        </Link>
-        <Link className="list">
-        <i className="ri-survey-line list-icon"></i>  <span>Attendance</span>
-        </Link>
-        <Link className="list">
-        <i className="ri-history-line list-icon"></i>  <span>History</span>
-        </Link>
-        <Link className="list">
-        <i className="ri-settings-3-line list-icon"></i>  <span>Settings</span>
-        </Link>
+        {links.map((lists, index )=> (<NavLink key={index} to={lists.path} className={lists.className} >
+        <i className={lists.iconName}></i><span>{lists.linkName}</span>
+        </NavLink>))}
         <button className="btn-logout" onClick={toggleSideBar}>
         <i className="ri-logout-box-line"></i>  Logout
         </button>
@@ -50,10 +68,10 @@ setVisibility(!isVisible);
       </div>
      
     </div>
-    <div
+    {/* <div
         className={isVisible? 'backdrop-blur': 'backdrop-none'}
         onClick={toggleSideBar}
-      ></div>
+      ></div> */}
     </>
   );
 };
