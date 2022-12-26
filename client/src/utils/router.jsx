@@ -15,11 +15,11 @@ const Routers = () => {
       <Route element={<PrivateRoutes />}>
         <Route path="/" element={<Home />} />
       </Route>
-      <Route element={<AdminLayout />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/managestudent" element={<ManageStudent />} />
-        <Route path="/history" element={<History/>} />
-        <Route path="/Settings" element={<Settings />} />
+      <Route  path="/admin"element={<AdminLayout />}>
+        <Route path="/admin/dashboard"  element={<Dashboard />} />
+        <Route path="/admin/managestudent" element={<ManageStudent />} />
+        <Route path="/admin/history" element={<History/>} />
+        <Route path="/admin/Settings" element={<Settings />} />
 
       </Route>
       <Route path="/login" element={<Login />} />
