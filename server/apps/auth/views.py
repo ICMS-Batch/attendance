@@ -13,6 +13,21 @@ from functools import wraps
 auth_bp = Blueprint("auth_bp", __name__)
 auth_api = Api(auth_bp)
 
+def admin_required(f) :
+    @wraps(f)
+    def updated_function(*args,**kwargs) :
+        token = request.headers["Authorization"]
+        if token :
+            payload = jwt.decode(token,EnvironmentConfig.SECRET_KEY,algorithms="HS256")
+            if payload["is_admin"] == True :
+                return f(*args,**kwargs) 
+            else :
+                return {"403" : "Access Denied"}
+        else :
+            return {"Error" : "Token Required"}
+    return updated_function
+
+
 def token_required(f) :
     @wraps(f)
     def updated_function(*args, **kwargs) :
@@ -30,9 +45,10 @@ class LoginResource(Resource):
         try:
             data = LoginSchema(request.get_json())
             data.validate()
-            User.login(data)
+            user = User.login(data)
             payload = {
-                'email' : data["email"],
+                'email' : user.email,
+                'is_admin' : user.is_admin,
                 'exp' : datetime.utcnow() + timedelta(seconds=30)
             }
             token = jwt.encode(payload,EnvironmentConfig.SECRET_KEY)
@@ -58,3 +74,4 @@ class RegisterResource(Resource):
 
 auth_api.add_resource(LoginResource, "/login")
 auth_api.add_resource(RegisterResource, "/register")
+

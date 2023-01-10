@@ -12,3 +12,4 @@ class RegistrationSchema(Model):
 class LoginSchema(Model):
     email = EmailType(required=True)
     password = StringType(required=True)
+    is_admin = StringType()
