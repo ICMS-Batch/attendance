@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import Input from "../components/Input";
 import Button from "../components/Button";
-import * as signup from "../css/login&signup.css";
+import "../css/login&signup.css";
 import { Link } from "react-router-dom";
+import supabase from "../services/supabase";
+import { NativeSelect, TextInput } from "@mantine/core";
+
 const SignUp = () => {
+  const [semesters, setSemesters] = useState([]);
+  const [error, setError] = useState(null);
   const [formDetail, setFormDetail] = useState({
     firstname: "",
     lastname: "",
@@ -13,9 +17,35 @@ const SignUp = () => {
     semester: "",
   });
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const getSemesters = async () => {
+      const { data, error } = await supabase
+        .from("semesters")
+        .select("name, id");
+      if (error) {
+        setError(error);
+      } else if (data) {
+        setSemesters(data);
+      }
+    };
+    getSemesters();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formDetail);
+    const { firstname, lastname } = formDetail;
+    const full_name = `${firstname} ${lastname}`;
+    const { data, error } = await supabase.auth.signUp({
+      email: formDetail.email,
+      password: formDetail.password,
+      options: {
+        data: {
+          full_name,
+          semester_id: Number(formDetail.semester),
+        },
+      },
+    });
+    console.log(data, error);
   };
 
   const handleSignup = (e) => {
@@ -25,69 +55,59 @@ const SignUp = () => {
     });
   };
 
-  const values = [
-    "1st Semester",
-    "2nd Semester",
-    "3rd Semester",
-    "4th Semester",
-    "5th Semester",
-    "6th Semester",
-    "7th Semester",
-  ];
-
   return (
     <div className="container">
       <div className="form-container">
         <img src="/assets/icmslogo.png" className="imglogo" />
         <label className="form-title">Sign Up</label>
         <form className="login-form" onSubmit={handleSubmit}>
-          <Input
-            placeholder="Enter your First Name"
-            label="First Name"
-            name="firstname"
-            errorMessage="first name is required"
-            onChange={(e) => handleSignup(e)}
-          />
-          <Input
-            placeholder="Enter your Last Name"
-            label="Last Name"
-            name="lastname"
-            errorMessage="Last name is required"
-            onChange={(e) => handleSignup(e)}
-          />
-          <Input
-            placeholder="fullname@tuicms.edu.np"
-            label="Email"
-            name="email"
-            type="email"
-            errorMessage="email is required and should be valid"
-            onChange={(e) => handleSignup(e)}
-          />
-          <Input
-            placeholder="Enter your Password"
-            label="Password"
-            type="password"
-            name="password"
-            errorMessage="password is required"
-            onChange={(e) => handleSignup(e)}
-          />
           <div className="inputs-div">
-            <label className="label">Semester</label>
-            <select
+            <TextInput
+              placeholder="Enter your First Name"
+              label="First Name"
+              name="firstname"
+              error="first name is required"
+              onChange={(e) => handleSignup(e)}
+            />
+          </div>
+          <div className="inputs-div">
+            <TextInput
+              placeholder="Enter your Last Name"
+              label="Last Name"
+              name="lastname"
+              error="Last name is required"
+              onChange={(e) => handleSignup(e)}
+            />
+          </div>
+          <div className="inputs-div">
+            <TextInput
+              placeholder="fullname@tuicms.edu.np"
+              label="Email"
+              name="email"
+              type="email"
+              error="email is required and should be valid"
+              onChange={(e) => handleSignup(e)}
+            />
+          </div>
+          <div className="inputs-div">
+            <TextInput
+              placeholder="Enter your Password"
+              label="Password"
+              type="password"
+              name="password"
+              error="password is required"
+              onChange={(e) => handleSignup(e)}
+            />
+          </div>
+          <div className="inputs-div">
+            <NativeSelect
+              data={semesters.map((semester) => semester.name)}
               value={formDetail.semester}
               name="semester"
-              className="dropdown"
+              label="Select your semester"
               onChange={(e) => handleSignup(e)}
-              required
-            >
-              {values.map((options, index) => {
-                return (
-                  <option value={options} key={index} className="dropdown-list">
-                    {options}
-                  </option>
-                );
-              })}
-            </select>
+              withAsterisk
+            />
           </div>
 
           <Button title="Sign Up" className="btn" />

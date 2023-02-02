@@ -1,20 +1,18 @@
-import { useState } from 'react';
-import { Calendar } from '@mantine/dates';
-import { Indicator } from '@mantine/core';
-
+import { useState } from "react";
+import { Calendar } from "@mantine/dates";
+import { Indicator } from "@mantine/core";
 
 import mantinecss from "./css/Mantine.css";
-const MantineCalendar=()=> {
+const MantineCalendar = () => {
   const [value, setValue] = useState(null);
-const logValue = (value)=>{
-  setValue(value);
-  console.log(value);
-
-}
+  const logValue = (value) => {
+    setValue(value);
+    console.log(value);
+  };
   return (
     <Calendar
       value={value}
-      onChange={value=>logValue(value)}
+      onChange={(value) => logValue(value)}
       renderDay={(date) => {
         const day = date.getDate();
         return (
@@ -25,6 +23,6 @@ const logValue = (value)=>{
       }}
     />
   );
-}
+};
 
 export default MantineCalendar;

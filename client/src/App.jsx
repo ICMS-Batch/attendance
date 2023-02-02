@@ -1,20 +1,18 @@
 import React from "react";
 
-import * as css from "./css/app.css";
-
+import { MantineProvider } from "@mantine/core";
+import { NotificationsProvider } from "@mantine/notifications";
+import "./css/app.css";
 import Routers from "./utils/router";
 
 const App = () => {
   return (
     <div>
-      {/* <Routes>
-        <Route element={<PrivateRoutes />}>
-          <Route path="/" element={<Home />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-      </Routes> */}
-      <Routers />
+      <MantineProvider withNormalizeCSS withCSSVariables>
+        <NotificationsProvider position="top-right">
+          <Routers />
+        </NotificationsProvider>
+      </MantineProvider>
     </div>
   );
 };

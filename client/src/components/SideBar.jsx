@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const SideBar = (props) => {
   const [isVisible, setVisibility] = useState(true);
-console.log(props.sidebar);
+  console.log(props.sidebar);
   const toggleSideBar = (props) => {
     setVisibility(!isVisible);
   };
@@ -22,6 +22,12 @@ console.log(props.sidebar);
       path: "/admin/managestudent",
       className: "list",
       linkName: "Attendance",
+      iconName: "ri-survey-line list-icon",
+    },
+    {
+      path: "/admin/routine",
+      className: "list",
+      linkName: "Routine",
       iconName: "ri-survey-line list-icon",
     },
     {
