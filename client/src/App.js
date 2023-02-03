@@ -1,8 +1,6 @@
 import "./App.css";
-import Header from "./components/Header/Header";
 import { ChakraProvider } from "@chakra-ui/provider";
 import { extendTheme } from "@chakra-ui/theme-utils";
-import { Home } from "./pages/Home";
 import Routers from "./router";
 const colors = {
   brand: {
@@ -19,7 +17,7 @@ const colors = {
   },
 };
 const config = {
-  initialColorMode: "dark",
+  initialColorMode: "light",
   useSystemColorMode: false,
 };
 
@@ -30,13 +28,10 @@ const breakpoints = {
   xl: "80em",
   "2xl": "96em",
 };
-
 const theme = extendTheme({ colors, config, breakpoints });
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      {/* <Header /> */}
-      {/* <Home /> */}
       <Routers />
     </ChakraProvider>
   );

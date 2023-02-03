@@ -13,13 +13,20 @@ import {
   IconButton,
   CloseButton,
   Avatar,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Text,
 } from "@chakra-ui/react";
 import {
   AiOutlineMenu,
   AiFillHome,
   AiOutlineInbox,
   AiFillBell,
+  // FiLogOut,
 } from "react-icons/ai";
+import { FiLogOut, FiSettings } from "react-icons/fi";
 import { BsFillCameraVideoFill } from "react-icons/bs";
 
 const Header = () => {
@@ -31,9 +38,11 @@ const Header = () => {
       <chakra.header
         bg={bg}
         w="full"
-        px={{ base: 2, sm: 4 }}
+        px={{ base: 2, sm: 3 }}
         py={4}
         shadow="sm"
+        position="sticky"
+        top="0"
       >
         <Flex alignItems="center" justifyContent="space-between" mx="auto">
           <HStack display="flex" spacing={3} alignItems="center">
@@ -111,12 +120,40 @@ const Header = () => {
               <AiFillBell />
               <VisuallyHidden>Notifications</VisuallyHidden>
             </chakra.a>
-
-            <Avatar
-              size="md"
-              name="Dan Abrahmov"
-              src="https://bit.ly/dan-abramov"
-            />
+            <Menu>
+              {({ isOpen }) => (
+                <>
+                  <Avatar
+                    src="https://bit.ly/dan-abramov"
+                    position="relative"
+                    zIndex={1}
+                  >
+                    <MenuButton
+                      isActive={isOpen}
+                      as={Button}
+                      bg="none"
+                      _hover={{ bg: "none" }}
+                      position="absolute"
+                      zIndex={0}
+                    ></MenuButton>
+                  </Avatar>
+                  <MenuList>
+                    <MenuItem>
+                      <Flex align="center" gap="2">
+                        <FiLogOut color="red" />
+                        <Text p="0">Logout</Text>
+                      </Flex>
+                    </MenuItem>
+                    <MenuItem onClick={() => alert("Kagebunshin")}>
+                      <Flex align="center" gap="2">
+                        <FiSettings color="#2B6CB0" />
+                        <Text p="0">Settings</Text>
+                      </Flex>
+                    </MenuItem>
+                  </MenuList>
+                </>
+              )}
+            </Menu>
           </HStack>
         </Flex>
       </chakra.header>

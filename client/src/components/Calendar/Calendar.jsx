@@ -4,9 +4,8 @@ import "./Calendar.css";
 const Calendar = ({ setDate }) => {
   return (
     <CalendarHeatmap
-    horizontal={true}
       startDate={new Date("2023-02-01")}
-      endDate={new Date("2023-03-02")}
+      endDate={new Date("2023-08-02")}
       values={[
         { date: "2023-02-02", count: 0 },
         { date: "2023-02-03", count: 1 },

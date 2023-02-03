@@ -26,23 +26,24 @@ const TimeLine = ({ title, date }) => {
   ];
   return (
     <Box
+    position='relative'
       _before={{
         backgroundColor: theme.colors.gray[300],
         bottom: 0,
         content: "''",
-        display: "block",
-        left: 0,
+        display: "flex",
+        left:0,
         position: "absolute",
-        top: 0,
-        width: "2px",
+        top: 3,
+        width: "3px",
       }}
     >
-      <Text fontSize={{sm:'20px', md:'22px', lg:'24px'}}>{days[date.getDay()]}</Text>
-      <List spacing={3}>
+      <Text  fontSize={{ base: '22px', md: '24px', lg: '28px' }} fontWeight="medium" ml='2' mt='2'>{days[date.getDay()]}</Text>
+      <List spacing={2} ml='3'>
         {events.map((event, index) => {
           const isSuccess = event.status === "success";
           return (
-            <ListItem key={index} fontSize="14px">
+            <ListItem key={index} fontSize={{base:'16px', md:'18px', lg:'20'}}>
               <ListIcon
                 as={isSuccess ? MdCheckCircle : RxCrossCircled}
                 color={event.status === "success" ? "green.500" : "red.500"}
