@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   chakra,
   Box,
@@ -24,10 +23,10 @@ import {
   AiFillHome,
   AiOutlineInbox,
   AiFillBell,
-  // FiLogOut,
 } from "react-icons/ai";
 import { FiLogOut, FiSettings } from "react-icons/fi";
 import { BsFillCameraVideoFill } from "react-icons/bs";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const bg = useColorModeValue("white", "gray.800");
@@ -139,10 +138,12 @@ const Header = () => {
                   </Avatar>
                   <MenuList>
                     <MenuItem>
-                      <Flex align="center" gap="2">
-                        <FiLogOut color="red" />
-                        <Text p="0">Logout</Text>
-                      </Flex>
+                      <NavLink to="/login">
+                        <Flex align="center" gap="2">
+                          <FiLogOut color="red" />
+                          <Text p="0">Logout</Text>
+                        </Flex>
+                      </NavLink>
                     </MenuItem>
                     <MenuItem onClick={() => alert("Kagebunshin")}>
                       <Flex align="center" gap="2">
