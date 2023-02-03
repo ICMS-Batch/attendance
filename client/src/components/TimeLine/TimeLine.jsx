@@ -37,7 +37,7 @@ const TimeLine = ({ title, date }) => {
         width: "2px",
       }}
     >
-      <Text fontSize="2xl">{days[date.getDay()]}</Text>
+      <Text fontSize={{sm:'20px', md:'22px', lg:'24px'}}>{days[date.getDay()]}</Text>
       <List spacing={3}>
         {events.map((event, index) => {
           const isSuccess = event.status === "success";

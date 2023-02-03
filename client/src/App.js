@@ -2,10 +2,8 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import { ChakraProvider } from "@chakra-ui/provider";
 import { extendTheme } from "@chakra-ui/theme-utils";
-import Calendar from "./components/Calendar/Calendar";
-import TimeLine from "./components/TimeLine/TimeLine";
-import { Box, Flex } from "@chakra-ui/layout";
-import { useState } from "react";
+import { Home } from "./pages/Home";
+import Routers from "./router";
 const colors = {
   brand: {
     50: "#ecefff",
@@ -25,33 +23,21 @@ const config = {
   useSystemColorMode: false,
 };
 
-const theme = extendTheme({ colors, config });
+const breakpoints = {
+  sm: "30em",
+  md: "48em",
+  lg: "62em",
+  xl: "80em",
+  "2xl": "96em",
+};
+
+const theme = extendTheme({ colors, config, breakpoints });
 function App() {
-  const [date, setDate] = useState(new Date());
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
-  if (date) {
-    var day = days[date.getUTCDay()];
-    console.log(day);
-  }
-
   return (
     <ChakraProvider theme={theme}>
-      <Header />
-      <Flex justifyContent="center" marginTop="10">
-        <Flex width="2xl" flexDirection="column" gap="5">
-          <Calendar setDate={setDate} />
-          <TimeLine title="Sunday" date={date} />
-        </Flex>
-      </Flex>
+      {/* <Header /> */}
+      {/* <Home /> */}
+      <Routers />
     </ChakraProvider>
   );
 }
