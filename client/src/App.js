@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import "./App.css";
+import { AuthProvider } from "./contexts/AuthContext";
+import Router from "./router";
 
 function App() {
+  const colors = {
+    brand: {
+      900: "#1a365d",
+      800: "#153e75",
+      700: "#2a69ac",
+    },
+  };
+
+  const breakpoints = {
+    xs: "20em",
+    sm: "30em",
+    md: "48em",
+    lg: "62em",
+    xl: "80em",
+    "2xl": "96em",
+  };
+  const theme = extendTheme({ colors, breakpoints });
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ChakraProvider theme={theme}>
+        <AuthProvider>
+          <Router />
+        </AuthProvider>
+      </ChakraProvider>
     </div>
   );
 }
