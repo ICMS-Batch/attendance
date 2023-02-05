@@ -20,7 +20,13 @@ function App() {
     xl: "80em",
     "2xl": "96em",
   };
-  const theme = extendTheme({ colors, breakpoints });
+  const theme = extendTheme({
+    colors,
+    breakpoints,
+    fonts: {
+      body: '"Manjari", sans-serif',
+    },
+  });
   return (
     <div className="App">
       <ChakraProvider theme={theme}>

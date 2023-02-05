@@ -19,7 +19,7 @@ const Register = () => {
     full_name: "",
     email: "",
     password: "",
-    sem_id: "",
+    semester_id: "",
   });
 
   const handleSubmit = async () => {
@@ -29,7 +29,7 @@ const Register = () => {
       email: formDetail.email,
       password: formDetail.password,
       options: {
-        data: { ...formDetail, sem_id: Number(formDetail.sem_id) },
+        data: { ...formDetail, semester_id: Number(formDetail.semester_id) },
       },
     });
 
@@ -118,7 +118,7 @@ const Register = () => {
             <FormLabel>Semester</FormLabel>
             <Select
               placeholder="Select Semester"
-              name="sem_id"
+              name="semester_id"
               onChange={handleValue}
             >
               {semesters.map((semester, index) => (

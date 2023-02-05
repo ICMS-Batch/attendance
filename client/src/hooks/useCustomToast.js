@@ -16,7 +16,7 @@ const useCustomToast = () => {
       description: message,
     });
   };
-  const error = (message) => {
+  const error = ({ message }) => {
     toast({ ...toastConfig, status: "error", description: message });
   };
   const info = (message) => {

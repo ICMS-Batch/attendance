@@ -2,9 +2,15 @@ import { createContext, useContext, useEffect, useState } from "react";
 import supabase from "../supabase";
 import { getStorage } from "../utils/storage";
 
+const defaultProfile = {
+  full_name: null,
+  role: "student",
+};
+
 const AuthContext = createContext({
   currentUser: null,
   isLoading: true,
+  profile: structuredClone(defaultProfile),
   setIsLoading: () => {},
   setCurrentUser: () => {},
 });
@@ -12,6 +18,7 @@ const AuthContext = createContext({
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [profile, setProfile] = useState(defaultProfile);
 
   useEffect(() => {
     const token = getStorage("token");
@@ -22,8 +29,15 @@ export const AuthProvider = ({ children }) => {
       } = await supabase.auth.getUser(token);
 
       if (user) {
-        console.log("user", user);
         setCurrentUser(user);
+        const { data: userProfile } = await supabase
+          .from("profiles")
+          .select("full_name, role")
+          .eq("id", user.id)
+          .single();
+
+        setProfile(userProfile);
+
         setIsLoading(false);
       } else if (error) {
         setCurrentUser(null);
@@ -40,6 +54,7 @@ export const AuthProvider = ({ children }) => {
         setCurrentUser,
         isLoading,
         setIsLoading,
+        profile,
       }}
     >
       {children}

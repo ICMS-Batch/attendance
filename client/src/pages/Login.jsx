@@ -27,7 +27,6 @@ const Login = () => {
   const handleSubmit = async () => {
     setIsLoading(true);
     const { email, password } = formDetail;
-    console.log("email", email, "password", password, "formDetail", formDetail);
 
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
@@ -37,7 +36,7 @@ const Login = () => {
     setIsLoading(false);
 
     if (error) {
-      showError(error.message);
+      showError({ message: error.message });
     } else if (data) {
       const {
         session: { access_token },
@@ -48,7 +47,7 @@ const Login = () => {
         { message: "Welcome Back" },
         {
           onCloseComplete: () => {
-            navigate("/form");
+            navigate("/");
           },
         }
       );
