@@ -13,6 +13,7 @@ const AuthContext = createContext({
   profile: structuredClone(defaultProfile),
   setIsLoading: () => {},
   setCurrentUser: () => {},
+  setProfile: () => {},
 });
 
 export const AuthProvider = ({ children }) => {
@@ -36,6 +37,8 @@ export const AuthProvider = ({ children }) => {
           .eq("id", user.id)
           .single();
 
+        console.log("user profile", userProfile);
+
         setProfile(userProfile);
 
         setIsLoading(false);
@@ -55,6 +58,7 @@ export const AuthProvider = ({ children }) => {
         isLoading,
         setIsLoading,
         profile,
+        setProfile,
       }}
     >
       {children}

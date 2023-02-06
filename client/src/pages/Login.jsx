@@ -9,7 +9,7 @@ import { setStorage } from "../utils/storage";
 
 const Login = () => {
   const { error: showError, success: showSuccess } = useCustomToast();
-  const { setCurrentUser, currentUser } = useAuth();
+  const { setCurrentUser, currentUser, setProfile } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [formDetail, setFormDetail] = useState({
@@ -42,7 +42,13 @@ const Login = () => {
         session: { access_token },
       } = data;
       setStorage("token", access_token);
+      const { data: userProfile } = await supabase
+        .from("profiles")
+        .select("full_name, role")
+        .eq("id", data.user.id)
+        .single();
       setCurrentUser(data.user);
+      setProfile(userProfile);
       showSuccess(
         { message: "Welcome Back" },
         {
@@ -56,7 +62,7 @@ const Login = () => {
 
   useEffect(() => {
     if (currentUser) {
-      navigate("/form");
+      navigate("/");
     }
   }, [currentUser, isLoading, navigate]);
 

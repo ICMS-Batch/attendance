@@ -1,4 +1,4 @@
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes, BrowserRouter, Outlet } from "react-router-dom";
 import PrivateRoutes from "./components/PrivateRoutes";
 import { useAuth } from "./contexts/AuthContext";
 import AttendanceForm from "./pages/Attendance";
@@ -13,6 +13,7 @@ const Router = () => {
   const { profile, isLoading } = useAuth();
   const { role } = profile;
 
+  console.log("role", role);
   if (isLoading) {
     return <Loader />;
   }
@@ -20,7 +21,7 @@ const Router = () => {
   const routes = {
     student: {
       path: "/",
-      element: <PrivateRoutes />,
+      element: <Outlet />,
       children: [
         {
           path: "",
