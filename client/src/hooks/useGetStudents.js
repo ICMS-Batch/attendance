@@ -7,12 +7,13 @@ const useGetStudents = () => {
 
   useEffect(() => {
     const getStudents = async () => {
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("role", "student");
+      const { data, error } = await supabase.rpc("get_all_students");
       if (data) {
-        setStudents(data);
+        const response = data.map((student, index) => ({
+          sn: index + 1,
+          ...student,
+        }));
+        setStudents(response);
       }
       if (error) {
         setError(error.message);

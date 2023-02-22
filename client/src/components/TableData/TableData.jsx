@@ -1,108 +1,79 @@
+import * as React from "react";
+import { Table, Thead, Tbody, Tr, Th, Td, chakra } from "@chakra-ui/react";
 import {
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import React from "react";
+  RxTriangleUp as TriangleUpIcon,
+  RxTriangleDown as TriangleDownIcon,
+} from "react-icons/rx";
+import {
+  useReactTable,
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+} from "@tanstack/react-table";
 
-const TableData = ({ headers, rows }) => {
-  const color1 = useColorModeValue("gray.400", "gray.400");
+const TableData = ({ data, columns }) => {
+  const [sorting, setSorting] = React.useState([]);
+  const table = useReactTable({
+    columns,
+    data,
+    getCoreRowModel: getCoreRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting,
+    },
+  });
+
   return (
-    <Table
-      w="full"
-      bg="white"
-      _dark={{ bg: "gray.800" }}
-      display={{
-        base: "block",
-        md: "table",
-      }}
-      sx={{
-        "@media print": {
-          display: "table",
-        },
-      }}
-    >
-      <Thead
-        display={{
-          base: "none",
-          md: "table-header-group",
-        }}
-        sx={{
-          "@media print": {
-            display: "table-header-group",
-          },
-        }}
-      >
-        <Tr>
-          {headers.map((x) => (
-            <Th key={x}>{x}</Th>
-          ))}
-        </Tr>
+    <Table>
+      <Thead bgCo>
+        {table.getHeaderGroups().map((headerGroup) => (
+          <Tr key={headerGroup.id}>
+            {headerGroup.headers.map((header) => {
+              // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
+              const meta = header.column.columnDef.meta;
+              return (
+                <Th
+                  key={header.id}
+                  onClick={header.column.getToggleSortingHandler()}
+                  isNumeric={meta?.isNumeric}
+                >
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
+                  )}
+
+                  <chakra.span pl="4">
+                    {header.column.getIsSorted() ? (
+                      header.column.getIsSorted() === "desc" ? (
+                        <TriangleDownIcon aria-label="sorted descending" />
+                      ) : (
+                        <TriangleUpIcon aria-label="sorted ascending" />
+                      )
+                    ) : null}
+                  </chakra.span>
+                </Th>
+              );
+            })}
+          </Tr>
+        ))}
       </Thead>
-      <Tbody
-        display={{
-          base: "block",
-          lg: "table-row-group",
-        }}
-        sx={{
-          "@media print": {
-            display: "table-row-group",
-          },
-        }}
-      >
-        {rows.map((token, tid) => {
-          return (
-            <Tr
-              key={tid}
-              display={{
-                base: "grid",
-                md: "table-row",
-              }}
-              sx={{
-                "@media print": {
-                  display: "table-row",
-                },
-                gridTemplateColumns: "minmax(0px, 35%) minmax(0px, 65%)",
-                gridGap: "10px",
-              }}
-            >
-              {Object.keys(token).map((x) => {
-                return (
-                  <React.Fragment key={`${tid}${x}`}>
-                    <Td
-                      display={{
-                        base: "table-cell",
-                        md: "none",
-                      }}
-                      sx={{
-                        "@media print": {
-                          display: "none",
-                        },
-                        textTransform: "uppercase",
-                        color: color1,
-                        fontSize: "xs",
-                        fontWeight: "bold",
-                        letterSpacing: "wider",
-                        fontFamily: "heading",
-                      }}
-                    >
-                      {x}
-                    </Td>
-                    <Td color={"gray.500"} fontSize="md" fontWeight="hairline">
-                      {token[x]}
-                    </Td>
-                  </React.Fragment>
-                );
-              })}
-            </Tr>
-          );
-        })}
+      <Tbody>
+        {table.getRowModel().rows.map((row) => (
+          <Tr key={row.id}>
+            {row.getVisibleCells().map((cell) => {
+              const meta = cell.column.columnDef.meta;
+              return (
+                <Td key={cell.id} isNumeric={meta?.isNumeric}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </Td>
+              );
+            })}
+          </Tr>
+        ))}
       </Tbody>
     </Table>
   );
 };
+
 export default TableData;

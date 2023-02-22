@@ -4,7 +4,6 @@ import { useAuth } from "./contexts/AuthContext";
 import AttendanceForm from "./pages/Attendance";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import StudentDashboard from "./pages/student/Dashboard";
 import StudentLists from "./pages/admin/Students";
 import AttendanceList from "./pages/admin/Attendances";
 import DashboardLayout from "./components/DashboardLayout";
@@ -23,10 +22,6 @@ const Router = () => {
       path: "/",
       element: <Outlet />,
       children: [
-        {
-          path: "",
-          element: <StudentDashboard />,
-        },
         {
           path: "form",
           element: <AttendanceForm />,
@@ -64,6 +59,7 @@ const Router = () => {
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="*" element={<h1>Not found</h1>} />
       </Routes>
     </BrowserRouter>
   );

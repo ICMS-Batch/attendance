@@ -20,18 +20,10 @@ const useGetCurrentClass = () => {
         .single();
 
       const { data, error: fetchError } = await supabase
-        .from("routine")
-        .select(
-          `
-          id,
-          day, 
-          start_time,
-          end_time,
-          subject(id, name)
-        `
-        )
-        .eq("sem_id", semester_id)
-        .eq("day", 7)
+        .rpc("get_current_class", {
+          p_sem_id: semester_id,
+          p_day: new Date().getDay() + 1,
+        })
         .single();
 
       if (fetchError) {
