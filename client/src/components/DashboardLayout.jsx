@@ -26,7 +26,7 @@ import { Outlet } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Sidebar from "./Sidebar/Sidebar";
 
-const MobileNav = ({ onOpen, user, profile, ...rest }) => {
+const MobileNav = ({ onOpen, user, profile, setCurrentUser, ...rest }) => {
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -101,7 +101,7 @@ const MobileNav = ({ onOpen, user, profile, ...rest }) => {
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem onClick={() => setCurrentUser(null)}>Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
@@ -130,7 +130,7 @@ const DashboardLayout = () => {
   ];
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { currentUser, profile } = useAuth();
+  const { currentUser, profile, setCurrentUser } = useAuth();
 
   const audioRef = useRef();
 
@@ -143,7 +143,12 @@ const DashboardLayout = () => {
           <Sidebar w="full" borderRight="none" links={links} />
         </DrawerContent>
       </Drawer>
-      <MobileNav onOpen={onOpen} user={currentUser} profile={profile} />
+      <MobileNav
+        onOpen={onOpen}
+        user={currentUser}
+        profile={profile}
+        setCurrentUser={setCurrentUser}
+      />
 
       <Box
         ml={{ base: 0, md: 60 }}
